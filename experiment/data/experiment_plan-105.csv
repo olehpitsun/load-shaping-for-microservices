@@ -1,0 +1,106 @@
+run_id,incident_group_id,fault_type,severity,workload_profile,replicate,seed,candidate_action
+RUN_000001,IG_00001,CPU Resource Exhaustion,Low,medium,1,900001,Restart
+RUN_000002,IG_00001,CPU Resource Exhaustion,Low,medium,1,900001,ScaleOut
+RUN_000003,IG_00001,CPU Resource Exhaustion,Low,medium,1,900001,Rollback
+RUN_000004,IG_00001,CPU Resource Exhaustion,Low,medium,1,900001,Failover
+RUN_000005,IG_00001,CPU Resource Exhaustion,Low,medium,1,900001,NoAction
+RUN_000006,IG_00002,CPU Resource Exhaustion,Medium,heavy,1,900002,Restart
+RUN_000007,IG_00002,CPU Resource Exhaustion,Medium,heavy,1,900002,ScaleOut
+RUN_000008,IG_00002,CPU Resource Exhaustion,Medium,heavy,1,900002,Rollback
+RUN_000009,IG_00002,CPU Resource Exhaustion,Medium,heavy,1,900002,Failover
+RUN_000010,IG_00002,CPU Resource Exhaustion,Medium,heavy,1,900002,NoAction
+RUN_000011,IG_00003,CPU Resource Exhaustion,High,light,1,900003,Restart
+RUN_000012,IG_00003,CPU Resource Exhaustion,High,light,1,900003,ScaleOut
+RUN_000013,IG_00003,CPU Resource Exhaustion,High,light,1,900003,Rollback
+RUN_000014,IG_00003,CPU Resource Exhaustion,High,light,1,900003,Failover
+RUN_000015,IG_00003,CPU Resource Exhaustion,High,light,1,900003,NoAction
+RUN_000016,IG_00004,Memory Pressure,Low,heavy,1,900004,Restart
+RUN_000017,IG_00004,Memory Pressure,Low,heavy,1,900004,ScaleOut
+RUN_000018,IG_00004,Memory Pressure,Low,heavy,1,900004,Rollback
+RUN_000019,IG_00004,Memory Pressure,Low,heavy,1,900004,Failover
+RUN_000020,IG_00004,Memory Pressure,Low,heavy,1,900004,NoAction
+RUN_000021,IG_00005,Memory Pressure,Medium,light,1,900005,Restart
+RUN_000022,IG_00005,Memory Pressure,Medium,light,1,900005,ScaleOut
+RUN_000023,IG_00005,Memory Pressure,Medium,light,1,900005,Rollback
+RUN_000024,IG_00005,Memory Pressure,Medium,light,1,900005,Failover
+RUN_000025,IG_00005,Memory Pressure,Medium,light,1,900005,NoAction
+RUN_000026,IG_00006,Memory Pressure,High,medium,1,900006,Restart
+RUN_000027,IG_00006,Memory Pressure,High,medium,1,900006,ScaleOut
+RUN_000028,IG_00006,Memory Pressure,High,medium,1,900006,Rollback
+RUN_000029,IG_00006,Memory Pressure,High,medium,1,900006,Failover
+RUN_000030,IG_00006,Memory Pressure,High,medium,1,900006,NoAction
+RUN_000031,IG_00007,Application Error Injection,Low,light,1,900007,Restart
+RUN_000032,IG_00007,Application Error Injection,Low,light,1,900007,ScaleOut
+RUN_000033,IG_00007,Application Error Injection,Low,light,1,900007,Rollback
+RUN_000034,IG_00007,Application Error Injection,Low,light,1,900007,Failover
+RUN_000035,IG_00007,Application Error Injection,Low,light,1,900007,NoAction
+RUN_000036,IG_00008,Application Error Injection,Medium,medium,1,900008,Restart
+RUN_000037,IG_00008,Application Error Injection,Medium,medium,1,900008,ScaleOut
+RUN_000038,IG_00008,Application Error Injection,Medium,medium,1,900008,Rollback
+RUN_000039,IG_00008,Application Error Injection,Medium,medium,1,900008,Failover
+RUN_000040,IG_00008,Application Error Injection,Medium,medium,1,900008,NoAction
+RUN_000041,IG_00009,Application Error Injection,High,heavy,1,900009,Restart
+RUN_000042,IG_00009,Application Error Injection,High,heavy,1,900009,ScaleOut
+RUN_000043,IG_00009,Application Error Injection,High,heavy,1,900009,Rollback
+RUN_000044,IG_00009,Application Error Injection,High,heavy,1,900009,Failover
+RUN_000045,IG_00009,Application Error Injection,High,heavy,1,900009,NoAction
+RUN_000046,IG_00010,Application Latency,Low,medium,1,900010,Restart
+RUN_000047,IG_00010,Application Latency,Low,medium,1,900010,ScaleOut
+RUN_000048,IG_00010,Application Latency,Low,medium,1,900010,Rollback
+RUN_000049,IG_00010,Application Latency,Low,medium,1,900010,Failover
+RUN_000050,IG_00010,Application Latency,Low,medium,1,900010,NoAction
+RUN_000051,IG_00011,Application Latency,Medium,heavy,1,900011,Restart
+RUN_000052,IG_00011,Application Latency,Medium,heavy,1,900011,ScaleOut
+RUN_000053,IG_00011,Application Latency,Medium,heavy,1,900011,Rollback
+RUN_000054,IG_00011,Application Latency,Medium,heavy,1,900011,Failover
+RUN_000055,IG_00011,Application Latency,Medium,heavy,1,900011,NoAction
+RUN_000056,IG_00012,Application Latency,High,light,1,900012,Restart
+RUN_000057,IG_00012,Application Latency,High,light,1,900012,ScaleOut
+RUN_000058,IG_00012,Application Latency,High,light,1,900012,Rollback
+RUN_000059,IG_00012,Application Latency,High,light,1,900012,Failover
+RUN_000060,IG_00012,Application Latency,High,light,1,900012,NoAction
+RUN_000061,IG_00013,Service Dependency Failure,Low,heavy,1,900013,Restart
+RUN_000062,IG_00013,Service Dependency Failure,Low,heavy,1,900013,ScaleOut
+RUN_000063,IG_00013,Service Dependency Failure,Low,heavy,1,900013,Rollback
+RUN_000064,IG_00013,Service Dependency Failure,Low,heavy,1,900013,Failover
+RUN_000065,IG_00013,Service Dependency Failure,Low,heavy,1,900013,NoAction
+RUN_000066,IG_00014,Service Dependency Failure,Medium,light,1,900014,Restart
+RUN_000067,IG_00014,Service Dependency Failure,Medium,light,1,900014,ScaleOut
+RUN_000068,IG_00014,Service Dependency Failure,Medium,light,1,900014,Rollback
+RUN_000069,IG_00014,Service Dependency Failure,Medium,light,1,900014,Failover
+RUN_000070,IG_00014,Service Dependency Failure,Medium,light,1,900014,NoAction
+RUN_000071,IG_00015,Service Dependency Failure,High,medium,1,900015,Restart
+RUN_000072,IG_00015,Service Dependency Failure,High,medium,1,900015,ScaleOut
+RUN_000073,IG_00015,Service Dependency Failure,High,medium,1,900015,Rollback
+RUN_000074,IG_00015,Service Dependency Failure,High,medium,1,900015,Failover
+RUN_000075,IG_00015,Service Dependency Failure,High,medium,1,900015,NoAction
+RUN_000076,IG_00016,Failed Software Deployment,Low,light,1,900016,Restart
+RUN_000077,IG_00016,Failed Software Deployment,Low,light,1,900016,ScaleOut
+RUN_000078,IG_00016,Failed Software Deployment,Low,light,1,900016,Rollback
+RUN_000079,IG_00016,Failed Software Deployment,Low,light,1,900016,Failover
+RUN_000080,IG_00016,Failed Software Deployment,Low,light,1,900016,NoAction
+RUN_000081,IG_00017,Failed Software Deployment,Medium,medium,1,900017,Restart
+RUN_000082,IG_00017,Failed Software Deployment,Medium,medium,1,900017,ScaleOut
+RUN_000083,IG_00017,Failed Software Deployment,Medium,medium,1,900017,Rollback
+RUN_000084,IG_00017,Failed Software Deployment,Medium,medium,1,900017,Failover
+RUN_000085,IG_00017,Failed Software Deployment,Medium,medium,1,900017,NoAction
+RUN_000086,IG_00018,Failed Software Deployment,High,heavy,1,900018,Restart
+RUN_000087,IG_00018,Failed Software Deployment,High,heavy,1,900018,ScaleOut
+RUN_000088,IG_00018,Failed Software Deployment,High,heavy,1,900018,Rollback
+RUN_000089,IG_00018,Failed Software Deployment,High,heavy,1,900018,Failover
+RUN_000090,IG_00018,Failed Software Deployment,High,heavy,1,900018,NoAction
+RUN_000091,IG_00019,Temporary Workload Spike,Low,medium,1,900019,Restart
+RUN_000092,IG_00019,Temporary Workload Spike,Low,medium,1,900019,ScaleOut
+RUN_000093,IG_00019,Temporary Workload Spike,Low,medium,1,900019,Rollback
+RUN_000094,IG_00019,Temporary Workload Spike,Low,medium,1,900019,Failover
+RUN_000095,IG_00019,Temporary Workload Spike,Low,medium,1,900019,NoAction
+RUN_000096,IG_00020,Temporary Workload Spike,Medium,heavy,1,900020,Restart
+RUN_000097,IG_00020,Temporary Workload Spike,Medium,heavy,1,900020,ScaleOut
+RUN_000098,IG_00020,Temporary Workload Spike,Medium,heavy,1,900020,Rollback
+RUN_000099,IG_00020,Temporary Workload Spike,Medium,heavy,1,900020,Failover
+RUN_000100,IG_00020,Temporary Workload Spike,Medium,heavy,1,900020,NoAction
+RUN_000101,IG_00021,Temporary Workload Spike,High,light,1,900021,Restart
+RUN_000102,IG_00021,Temporary Workload Spike,High,light,1,900021,ScaleOut
+RUN_000103,IG_00021,Temporary Workload Spike,High,light,1,900021,Rollback
+RUN_000104,IG_00021,Temporary Workload Spike,High,light,1,900021,Failover
+RUN_000105,IG_00021,Temporary Workload Spike,High,light,1,900021,NoAction

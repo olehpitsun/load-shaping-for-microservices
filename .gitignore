@@ -1,0 +1,5 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+experiment/data/recovery_experiments_raw.csv

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AlexNet Image Classifier</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="card">
+    <div class="badge">Research demo</div>
+    <h1>AlexNet Image Classifier</h1>
+    <p class="lead">
+      Upload an image and receive the five most probable ImageNet classes
+      predicted by a pretrained AlexNet model.
+    </p>
+
+    <form id="form">
+      <label class="upload">
+        <span>Select image</span>
+        <input id="file" type="file" accept="image/*" required>
+      </label>
+      <button type="submit">Classify image</button>
+    </form>
+
+    <div id="preview-wrap" class="hidden">
+      <img id="preview" alt="Uploaded preview">
+    </div>
+
+    <div id="status"></div>
+    <ol id="results"></ol>
+
+    <footer>
+      FastAPI · PyTorch/TorchVision · AlexNet · Prometheus
+    </footer>
+  </main>
+
+<script>
+const form = document.getElementById("form");
+const fileInput = document.getElementById("file");
+const preview = document.getElementById("preview");
+const previewWrap = document.getElementById("preview-wrap");
+const status = document.getElementById("status");
+const results = document.getElementById("results");
+
+fileInput.addEventListener("change", () => {
+  const f = fileInput.files[0];
+  if (!f) return;
+  preview.src = URL.createObjectURL(f);
+  previewWrap.classList.remove("hidden");
+});
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const f = fileInput.files[0];
+  if (!f) return;
+
+  status.textContent = "Classifying…";
+  results.innerHTML = "";
+
+  const body = new FormData();
+  body.append("file", f);
+
+  try {
+    const r = await fetch("/predict", {method: "POST", body});
+    const data = await r.json();
+
+    if (!r.ok) {
+      throw new Error(data.detail || "Prediction failed");
+    }
+
+    status.textContent = `Model: ${data.model} · dependency: ${data.dependency}`;
+    data.predictions.forEach((p) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<strong>${p.label}</strong><span>${(p.probability * 100).toFixed(2)}%</span>`;
+      results.appendChild(li);
+    });
+  } catch (err) {
+    status.textContent = `Error: ${err.message}`;
+  }
+});
+</script>
+</body>
+</html>

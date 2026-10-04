@@ -1,0 +1,9 @@
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+python-multipart>=0.0.9,<1
+jinja2>=3.1,<4
+prometheus-client>=0.21,<1
+httpx>=0.27,<1
+pillow>=10,<13
+torch>=2.5,<3
+torchvision>=0.20,<1

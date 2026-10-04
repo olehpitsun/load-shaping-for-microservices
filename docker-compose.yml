@@ -1,0 +1,111 @@
+services:
+  classifier:
+    build:
+      context: ./app
+    environment:
+      LAB_KEY: ${LAB_KEY:-local-recovery-lab-key}
+      ALEXNET_DEVICE: ${ALEXNET_DEVICE:-cpu}
+      DEPENDENCY_PRIMARY: http://metadata-primary:8100
+      DEPENDENCY_STANDBY: http://metadata-standby:8100
+      DEPLOYMENT_STATE_FILE: /lab-state/deployment.json
+      TORCH_HOME: /torch-cache
+    volumes:
+      - model-cache:/torch-cache
+      - deployment-state:/lab-state
+    expose:
+      - "8000"
+    mem_limit: 1g
+    cpus: 1.5
+    restart: unless-stopped
+    depends_on:
+      - metadata-primary
+      - metadata-standby
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+      start_period: 60s
+    networks:
+      - labnet
+
+  metadata-primary:
+    build:
+      context: ./metadata
+    environment:
+      INSTANCE_NAME: primary
+    expose:
+      - "8100"
+    restart: unless-stopped
+    networks:
+      - labnet
+
+  metadata-standby:
+    build:
+      context: ./metadata
+    environment:
+      INSTANCE_NAME: standby
+    expose:
+      - "8100"
+    restart: unless-stopped
+    networks:
+      - labnet
+
+  gateway:
+    image: nginx:1.27-alpine
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      classifier:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - labnet
+
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+    networks:
+      - labnet
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.52.1
+    privileged: true
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports:
+      - "8081:8080"
+    restart: unless-stopped
+    networks:
+      - labnet
+
+  locust:
+    image: locustio/locust:2.40.4
+    volumes:
+      - ./locust:/mnt/locust:ro
+    working_dir: /mnt/locust
+    entrypoint: ["locust"]
+    networks:
+      - labnet
+
+volumes:
+  model-cache:
+  deployment-state:
+  prometheus-data:
+
+networks:
+  labnet:
+    driver: bridge

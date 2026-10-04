@@ -1,0 +1,61 @@
+project:
+  compose_file: docker-compose.yml
+  gateway_url: http://127.0.0.1:8000
+  prometheus_url: http://127.0.0.1:9090
+  lab_key: local-recovery-lab-key
+
+timing:
+  reset_wait_s: 12
+  workload_warmup_s: 20
+  baseline_duration_s: 35
+  degraded_duration_s: 25
+  post_action_duration_s: 70
+  sample_interval_s: 5
+  stable_samples_required: 3
+
+# Calibrated for CPU-based AlexNet on a typical Windows 11 + Docker Desktop
+# development machine. The previous medium profile (12 users) already pushed
+# p95 latency above the absolute 1000 ms SLA before fault injection.
+workloads:
+  light:
+    users: 2
+    spawn_rate: 1
+  medium:
+    users: 4
+    spawn_rate: 1
+  heavy:
+    users: 6
+    spawn_rate: 2
+
+temporary_spike:
+  Low:
+    users: 8
+    spawn_rate: 2
+    duration_s: 30
+  Medium:
+    users: 12
+    spawn_rate: 3
+    duration_s: 35
+  High:
+    users: 20
+    spawn_rate: 5
+    duration_s: 40
+
+recovery_rules:
+  availability_min: 0.99
+  latency_factor_over_baseline: 1.5
+  latency_floor_ms: 1000
+  error_delta_pct_points: 2.0
+  error_ceiling_pct: 3.0
+
+prometheus_queries:
+  # cAdvisor's `name` label is more robust across Docker Desktop Compose
+  # project names than relying on the generated Compose service label.
+  cpu_pct: '100 * (sum(rate(container_cpu_usage_seconds_total{name=~".*classifier.*"}[30s])) or sum(rate(container_cpu_usage_seconds_total{container_label_com_docker_compose_service="classifier"}[30s])))'
+  memory_mb: '(sum(container_memory_working_set_bytes{name=~".*classifier.*"}) or sum(container_memory_working_set_bytes{container_label_com_docker_compose_service="classifier"})) / 1024 / 1024'
+  latency_ms: '1000 * histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{job="classifier",endpoint="/predict"}[1m])) by (le))'
+  error_rate_pct: '100 * (sum(rate(http_requests_total{job="classifier",endpoint="/predict",status=~"5.."}[1m])) or vector(0)) / clamp_min(sum(rate(http_requests_total{job="classifier",endpoint="/predict"}[1m])), 0.000001)'
+  request_rate: 'sum(rate(http_requests_total{job="classifier",endpoint="/predict"}[1m]))'
+  availability: 'avg(up{job="classifier"})'
+  inference_latency_ms: '1000 * histogram_quantile(0.95, sum(rate(inference_duration_seconds_bucket{job="classifier"}[1m])) by (le))'
+  queue_length: 'sum(queue_length{job="classifier"})'
